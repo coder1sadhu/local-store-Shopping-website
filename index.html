@@ -547,6 +547,144 @@ header {
 }
 #toast.show { opacity:1; transform:translateX(-50%) translateY(0); }
 
+/* ── SEARCH BAR ── */
+.search-wrap {
+  position: relative; margin-bottom: 24px;
+}
+.search-input {
+  width: 100%; padding: 13px 18px 13px 46px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  color: var(--white); font-family: 'Inter', sans-serif;
+  font-size: 14px; outline: none;
+  transition: border-color .2s, background .2s;
+}
+.search-input:focus {
+  border-color: rgba(200,255,0,0.4);
+  background: rgba(200,255,0,0.04);
+}
+.search-input::placeholder { color: rgba(245,244,240,0.3); }
+.search-icon {
+  position: absolute; left: 16px; top: 50%;
+  transform: translateY(-50%);
+  color: var(--muted); pointer-events: none; font-size: 16px;
+}
+.search-clear {
+  position: absolute; right: 14px; top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255,255,255,0.08); border: none;
+  color: var(--muted); width: 24px; height: 24px;
+  border-radius: 50%; cursor: pointer; font-size: 13px;
+  display: none; align-items: center; justify-content: center;
+}
+.search-clear.show { display: flex; }
+.no-results {
+  text-align: center; padding: 60px 20px;
+  color: var(--muted); grid-column: 1/-1;
+}
+.no-results .nr-icon { font-size: 48px; margin-bottom: 12px; }
+.no-results p { font-size: 15px; }
+
+/* ── OUT OF STOCK ── */
+.product-card.oos { opacity: .6; }
+.product-card.oos .product-img-wrap::after {
+  content: 'OUT OF STOCK';
+  position: absolute; inset: 0;
+  background: rgba(8,8,8,0.65);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 11px; font-weight: 800; letter-spacing: .12em;
+  color: var(--white);
+}
+.product-card.oos .add-btn {
+  background: rgba(255,255,255,0.06) !important;
+  border-color: var(--border) !important;
+  color: var(--muted) !important;
+  cursor: not-allowed; box-shadow: none !important;
+}
+
+/* ── PRODUCT POPUP ── */
+#popup-overlay {
+  display: none; position: fixed; inset: 0; z-index: 500;
+  background: rgba(0,0,0,0.80); backdrop-filter: blur(8px);
+  align-items: center; justify-content: center; padding: 20px;
+}
+#popup-overlay.open { display: flex; }
+#product-popup {
+  background: var(--off-black);
+  border: 1px solid var(--border);
+  border-radius: 24px; width: 100%; max-width: 480px;
+  overflow: hidden;
+  box-shadow: 0 30px 80px rgba(0,0,0,0.6);
+  animation: popIn .25s cubic-bezier(.4,0,.2,1);
+}
+@keyframes popIn {
+  from { opacity:0; transform:scale(.95) translateY(10px); }
+  to   { opacity:1; transform:scale(1) translateY(0); }
+}
+.popup-img-wrap {
+  position: relative; padding-top: 56%; overflow: hidden;
+  background: #1a1a1c;
+}
+.popup-img-wrap img {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: cover;
+}
+.popup-close {
+  position: absolute; top: 12px; right: 12px;
+  width: 34px; height: 34px; border-radius: 50%;
+  background: rgba(8,8,8,0.70); backdrop-filter: blur(6px);
+  border: 1px solid var(--border);
+  color: var(--white); font-size: 15px; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+}
+.popup-oos-banner {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  background: rgba(8,8,8,0.80); padding: 8px;
+  text-align: center; font-family: 'Montserrat', sans-serif;
+  font-size: 11px; font-weight: 800; letter-spacing: .1em;
+  color: var(--accent2);
+}
+.popup-body { padding: 22px 24px 28px; }
+.popup-cat {
+  font-size: 10px; font-weight: 700; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--accent); margin-bottom: 6px;
+}
+.popup-name {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 22px; font-weight: 800; color: var(--white);
+  line-height: 1.2; margin-bottom: 10px;
+}
+.popup-desc {
+  font-size: 14px; color: var(--muted); line-height: 1.6;
+  margin-bottom: 20px;
+}
+.popup-footer {
+  display: flex; align-items: center;
+  justify-content: space-between; gap: 16px;
+}
+.popup-price {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 28px; font-weight: 900; color: var(--white);
+}
+.popup-price sup { font-size: 16px; color: var(--muted); }
+.popup-add-btn {
+  flex: 1; padding: 14px;
+  background: var(--accent); color: var(--black);
+  border: none; border-radius: var(--rs);
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800; font-size: 13px; letter-spacing: .04em;
+  text-transform: uppercase; cursor: pointer;
+  transition: opacity .15s, box-shadow .15s;
+  box-shadow: 0 0 20px rgba(200,255,0,0.3);
+}
+.popup-add-btn:hover { opacity: .88; }
+.popup-add-btn:disabled {
+  background: rgba(255,255,255,0.08);
+  color: var(--muted); cursor: not-allowed; box-shadow: none;
+}
+
 /* ── FOOTER ── */
 footer {
   border-top:1px solid var(--border);
@@ -636,6 +774,13 @@ footer a { color:var(--muted); }
     <div class="section-eyebrow">Our Collection</div>
     <div class="section-title">Drop-worthy<br><span>Essentials</span></div>
   </div>
+  <!-- SEARCH -->
+  <div class="search-wrap">
+    <span class="search-icon">🔍</span>
+    <input class="search-input" id="search-input" type="text" placeholder="Search products..." oninput="onSearch(this.value)" autocomplete="off"/>
+    <button class="search-clear" id="search-clear" onclick="clearSearch()">✕</button>
+  </div>
+
   <div class="filters" id="filters">
     <button class="filter-btn active" onclick="filterCat(this,'All')">All</button>
     <button class="filter-btn" onclick="filterCat(this,'Grocery')">Grocery</button>
@@ -750,7 +895,7 @@ const products = [
     desc:"Full-cream richness in every sip" },
   { id:3, name:"Maggi Noodles × 6", price:89, cat:"Snacks",
     img:"https://images.unsplash.com/photo-1612929633738-8fe44f7ec841?w=500&q=80",
-    desc:"The OG 2-minute comfort food" },
+    desc:"The OG 2-minute comfort food", oos:true },
   { id:4, name:"Red Bull Energy 250ml", price:125, cat:"Beverages",
     img:"https://images.unsplash.com/photo-1622543925917-763c34d1a86e?w=500&q=80",
     desc:"Gives you wings. For real." },
@@ -771,7 +916,7 @@ const products = [
     desc:"Moisturizing shower gel with ¼ cream" },
   { id:10, name:"Minimalist Sunscreen SPF 50", price:399, cat:"Skincare",
     img:"https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=500&q=80",
-    desc:"Lightweight, non-greasy, gen-z approved" },
+    desc:"Lightweight, non-greasy, gen-z approved", oos:true },
   { id:11, name:"Classmate Notebook Set", price:149, cat:"Stationery",
     img:"https://images.unsplash.com/photo-1531346878377-a5be20888e57?w=500&q=80",
     desc:"Pack of 6 ruled notebooks, 160 pages each" },
@@ -794,13 +939,23 @@ function updateFab(){
   el.style.display = c > 0 ? 'flex' : 'none';
 }
 
+let searchQuery = '';
+
 function renderProducts(filter){
   activeFilter = filter;
   const grid = document.getElementById('products-grid');
-  const list = filter === 'All' ? products : products.filter(p => p.cat === filter);
+  let list = filter === 'All' ? products : products.filter(p => p.cat === filter);
+  if(searchQuery){
+    const q = searchQuery.toLowerCase();
+    list = list.filter(p => p.name.toLowerCase().includes(q) || p.desc.toLowerCase().includes(q) || p.cat.toLowerCase().includes(q));
+  }
+  if(!list.length){
+    grid.innerHTML = `<div class="no-results"><div class="nr-icon">🔍</div><p>No products found for "<strong>${searchQuery}</strong>"</p></div>`;
+    return;
+  }
   grid.innerHTML = list.map(p => {
     const inCart = cart.find(c => c.id === p.id);
-    return `<div class="product-card">
+    return `<div class="product-card${p.oos?' oos':''}" onclick="openPopup(${p.id})">
       <div class="product-img-wrap">
         <img src="${p.img}" alt="${p.name}" loading="lazy"/>
         <div class="product-cat-badge">${p.cat}</div>
@@ -810,13 +965,65 @@ function renderProducts(filter){
         <div class="product-desc">${p.desc}</div>
         <div class="product-footer">
           <div class="product-price"><sup>₹</sup>${p.price}</div>
-          <button class="add-btn ${inCart?'added':''}" id="ab-${p.id}" onclick="addToCart(${p.id})">
-            ${inCart ? '✓' : '+'}
+          <button class="add-btn ${inCart?'added':''}" id="ab-${p.id}" onclick="event.stopPropagation();${p.oos?'':'addToCart('+p.id+')'}" ${p.oos?'disabled title="Out of stock"':''}>
+            ${p.oos ? '✕' : inCart ? '✓' : '+'}
           </button>
         </div>
       </div>
     </div>`;
   }).join('');
+}
+
+/* ── SEARCH ── */
+function onSearch(val){
+  searchQuery = val.trim();
+  document.getElementById('search-clear').classList.toggle('show', val.length > 0);
+  renderProducts(activeFilter);
+}
+function clearSearch(){
+  document.getElementById('search-input').value = '';
+  searchQuery = '';
+  document.getElementById('search-clear').classList.remove('show');
+  renderProducts(activeFilter);
+}
+
+/* ── PRODUCT POPUP ── */
+let popupProductId = null;
+function openPopup(id){
+  const p = products.find(x => x.id === id);
+  popupProductId = id;
+  document.getElementById('popup-img').src = p.img;
+  document.getElementById('popup-img').alt = p.name;
+  document.getElementById('popup-cat').textContent = p.cat;
+  document.getElementById('popup-name').textContent = p.name;
+  document.getElementById('popup-desc').textContent = p.desc;
+  document.getElementById('popup-price').textContent = p.price;
+  const oosBanner = document.getElementById('popup-oos-banner');
+  const addBtn = document.getElementById('popup-add-btn');
+  if(p.oos){
+    oosBanner.style.display = 'block';
+    addBtn.disabled = true;
+    addBtn.textContent = 'Out of Stock';
+  } else {
+    oosBanner.style.display = 'none';
+    addBtn.disabled = false;
+    const inCart = cart.find(c => c.id === id);
+    addBtn.textContent = inCart ? '✓ Added to Cart' : 'Add to Cart';
+  }
+  document.getElementById('popup-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closePopup(e){
+  if(e.target === document.getElementById('popup-overlay')) closePopupDirect();
+}
+function closePopupDirect(){
+  document.getElementById('popup-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function popupAddToCart(){
+  if(!popupProductId) return;
+  addToCart(popupProductId);
+  document.getElementById('popup-add-btn').textContent = '✓ Added to Cart';
 }
 
 function filterCat(btn, cat){
@@ -953,5 +1160,26 @@ setTimeout(() => document.getElementById('hero-bg').classList.add('loaded'), 100
 renderProducts('All');
 updateFab();
 </script>
+
+<!-- PRODUCT POPUP -->
+<div id="popup-overlay" onclick="closePopup(event)">
+  <div id="product-popup">
+    <div class="popup-img-wrap">
+      <img id="popup-img" src="" alt=""/>
+      <button class="popup-close" onclick="closePopupDirect()">✕</button>
+      <div class="popup-oos-banner" id="popup-oos-banner" style="display:none">Out of Stock</div>
+    </div>
+    <div class="popup-body">
+      <div class="popup-cat" id="popup-cat"></div>
+      <div class="popup-name" id="popup-name"></div>
+      <div class="popup-desc" id="popup-desc"></div>
+      <div class="popup-footer">
+        <div class="popup-price"><sup>₹</sup><span id="popup-price"></span></div>
+        <button class="popup-add-btn" id="popup-add-btn" onclick="popupAddToCart()">Add to Cart</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 </body>
 </html>
