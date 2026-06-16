@@ -42,10 +42,6 @@ This project was built to practice and improve my **frontend web development ski
 * Admin dashboard for products
 * Order tracking system
 
-## 📸 Preview
-
-(Add screenshots here later)
-
 ## 📌 Repository
 
 `local-store-Shopping-website`
